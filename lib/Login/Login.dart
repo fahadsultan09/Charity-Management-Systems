@@ -77,12 +77,12 @@ bool obsureTextValue = true;
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            new Image(
-              image: AssetImage('assets/images/images.jpg'),
-              fit: BoxFit.cover,
-              color: Colors.black45,
-              colorBlendMode: BlendMode.darken,
-            ),
+            // new Image(
+            //   image: AssetImage('assets/images/images.jpg'),
+            //   fit: BoxFit.cover,
+            //   color: Colors.black45,
+            //   colorBlendMode: BlendMode.darken,
+            // ),
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
