@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notifier/Login/Authentication.dart';
-
-import 'package:notifier/Login/Login.dart';
 import 'package:notifier/Login/RootPage.dart';
 
 
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Notifier',
+      title: 'Donor',
       theme: ThemeData(
           accentColor: CupertinoColors.systemBlue,
       ),

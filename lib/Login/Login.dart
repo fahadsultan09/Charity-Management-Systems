@@ -99,7 +99,7 @@ bool obsureTextValue = true;
                   Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
-                    child: Text('Collection',
+                    child: Text('Donar',
                         style: TextStyle(
                             fontSize: 45.0, fontWeight: FontWeight.bold)),
                   ),

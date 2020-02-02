@@ -1,95 +1,66 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notifier/Home/Home.dart';
-import 'package:notifier/Login/Authentication.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:notifier/Login/SignUpPage2.dart';
 
+class SignUpPage2 extends StatefulWidget {
 
-
-class SignupPage extends StatefulWidget {
-
-   final BaseAuth auth;
-
-  SignupPage({this.auth});
-
+  SignUpPage2(this.userId);
+  String userId;
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _SignUpPage2State createState() => _SignUpPage2State();
 }
 
-class _SignupPageState extends State<SignupPage> {
-  bool obsureTextValue = true;
-  FirebaseMessaging fcm = FirebaseMessaging();
-  void _ChangeText(){
-    setState(() {
-     if(obsureTextValue){
-       obsureTextValue = false;
+class _SignUpPage2State extends State<SignUpPage2> {
 
-     }
-     else{
-       obsureTextValue = true;
-
-     }
-    });
-  }
-
-  String _fullName="";
-  String _email="";
-  String _password="";
-  String _phoneNum="";
-
-
-  String _fcm="";
-  int amount = 0;
-  String _fatherName ="";
-  String _fatherStatus ="";
-  String _familyGroup ="";
-  String _villageGroup ="";
-
-
-
+  String _education="";
+  String _skills="";
+  String _gender = "Male";
+  String _reference ="";
+  String _statusOfReference ="";
+  String _dob;
+  String _accountNumber ="";
+  String _memberNeeded ="";
+  String _SOC="";
+  
   final _formKey = new GlobalKey<FormState>();
-  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  // final DateFormat format = DateFormat("yyyy-MM-dd");
+  List<String> _items = ["Male","Female"];
 
+  
   Future validateAndSubmit () async {
     
     if (true){
       try {
     //  AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password);
-                     
-          AuthResult _user =  (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password));
-          
-   
+
+      FirebaseAuth auth  = FirebaseAuth.instance;
 
         // Firestore _firestore = Firestore.instance;
-      if(_user!=null){
+      if(widget.userId!=null){
 
 
           Firestore _firestore = Firestore.instance;
-        _firestore.collection("Users").document("1").collection("children").document(_user.user.uid).setData(
-        {"Email": _email,
-        "Full Name": _fullName,
-        "Phone": _phoneNum,
-        "Father Name":_fatherName,
-        "Family Status":_fatherStatus,
-        "Family Group":_familyGroup,
-        "Village Group":_villageGroup,
-        // "Reference":_reference,
-        // "Status Of Reference":_statusOfReference,
-        // "Date Of Birth":_dob,   
-        // "Source Of Income":_SOC,
-        // "Education":_education,
-        // "Gender":_gender,
-        // "Skills":_skills,
-        // "Account Number":_accountNumber,
-        // "Member Needed":_memberNeeded,
-        "token":_fcm,
-        "Amount":amount,
+        _firestore.collection("Users").document("1").setData({
+          "1":"a",
+        });
+        _firestore.collection("Users").document("1").collection("children").document(widget.userId).updateData(
+        {
+
+        "Reference":_reference,
+        "Status Of Reference":_statusOfReference,
+        "Date Of Birth":_dob,   
+        "Source Of Income":_SOC,
+        "Education":_education,
+        "Gender":_gender,
+        "Skills":_skills,
+        "Account Number":_accountNumber,
+        "Member Needed":_memberNeeded,
+
       });
 
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid)));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
        } 
     
    
@@ -104,17 +75,6 @@ class _SignupPageState extends State<SignupPage> {
     
       }
 
-  void _saveDeviceToken() async{
-    _fcm = await fcm.getToken();
-
-  }
- 
-
-  @override
-  void initState() { 
-    super.initState();
-    _saveDeviceToken();
-  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -128,100 +88,171 @@ class _SignupPageState extends State<SignupPage> {
               padding: EdgeInsets.only(top: 25.0, left: 20.0, right: 20.0),
               child: Column(
                 children: <Widget>[
-                  TextFormField(
+                  
+
+ SizedBox(height: 10.0),
+                 TextFormField(
                     keyboardType: TextInputType.text,
-                    validator: (input) => input.isEmpty ? 'Name cannot be empty' : null,
+                      validator: (input) => input.isEmpty ? 'Reference cannot be empty' : null,
                       onChanged: (value){
                            
-                            _fullName = value;
+                            _reference = value;
+                          
                           },
                     decoration: InputDecoration(
-                      labelText: 'FULL NAME ',
+                        
+                        labelText: 'REFERENCE',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                        
-                        
                   ),
-                  // SizedBox(height: 10.0),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                      validator: (input) => input.isEmpty ? 'Email cannot be empty' : null,
+                 SizedBox(height: 10.0),
+                 TextFormField(
+                    keyboardType: TextInputType.text,
+                      validator: (input) => input.isEmpty ? 'Status Of Reference cannot be empty' : null,
                       onChanged: (value){
                            
-                            _email = value;
+                            _statusOfReference = value;
+                 
+                          },
+                    decoration: InputDecoration(
+                        
+                        labelText: 'STATUS OF REFERENCE',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
+                  ),
+                 SizedBox(height: 10.0),
+                  
+                  TextFormField(
+                    // enabled: false,
+                    onTap: (){
+
+                        
+                         Future<DateTime> selectedDate = showDatePicker(
+   context: context,
+   initialDate: DateTime(1990),
+   firstDate: DateTime(1950),
+   lastDate: DateTime.now(),
+   builder: (BuildContext context, Widget child) {
+     return Theme(
+       data: ThemeData.dark(),
+       child: child,
+     );
+   },
+ );
+
+ if(selectedDate!=null){
+    selectedDate.then((onValue){
+      setState(() {
+      _dob =   onValue.toString().substring(0,10);
+
+      });
+    });
+ }
+      
+                    },
+                    keyboardType: TextInputType.text,
+                      validator: (input) => input.isEmpty ? 'DATE OF BIRTH cannot be empty' : null,
+                    // initialValue: _dob,
+                    onChanged: (value){
+                        setState(() {
+                          
+                          value = _dob;
+
+                        });
+                    },
+                    decoration: InputDecoration(
+                        suffixIcon: IconButton(icon: Icon(Icons.calendar_today),onPressed: (){
+                             
+                        },),
+                        labelText: 'DATE OF BIRTH',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
+                  ),
+
+                 SizedBox(height: 10.0),
+
+
+                 
+                   Container(
+                width: 150.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: Colors.blueGrey),
+                ),
+                child : DropdownButtonHideUnderline(
+
+                  child: ButtonTheme(
                     
-                          },
-                    decoration: InputDecoration(
-                        labelText: 'EMAIL',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        // hintText: 'EMAIL',
-                        // hintStyle: ,
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
+                    alignedDropdown: true,
+                    child: new DropdownButton<String>(
+                      value: _gender,
+                      items: _items.map((lable) {
+                        return new DropdownMenuItem<String>(
+                          value: lable,
+
+                          child: new Text(lable),
+                        );
+                      }).toList(),
+                      hint: Text('Gender'),
+                      onChanged: (value) {
+                        setState((){
+                          _gender = value;
+    
+                        });
+                        
+                      },
+                    ),
                   ),
-                  SizedBox(height: 10.0),
-                  TextFormField(
+              ),
+              ),
+              SizedBox(height: 10.0),
+              
+                     TextFormField(
                     keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'Password cannot be empty' : null,
+                      validator: (input) => input.isEmpty ? 'Source of Income cannot be empty' : null,
                       onChanged: (value){
                            
-                            _password = value;
-
-
+                            _SOC = value;
+                             
                           },
                     decoration: InputDecoration(
-                        suffixIcon: IconButton(icon: new Icon(Icons.remove_red_eye),onPressed: _ChangeText ,color: Colors.grey,),
                         
-                        labelText: 'PASSWORD',
+                        labelText: 'SOURCE OF INCOME',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                            
-                    obscureText: obsureTextValue,
                   ),
-                  SizedBox(height: 10.0),
+
+ SizedBox(height: 10.0),
                   
                      TextFormField(
-                    keyboardType: TextInputType.number,
-                      validator: (input) => input.isEmpty ? 'Phone Number cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            _phoneNum = value;
-                          },
-                    decoration: InputDecoration(
-                        
-                        labelText: 'PHONE NO.',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
-                  ),
-                 SizedBox(height: 10.0),
-
-                
-                TextFormField(
                     keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'FATHER NAME cannot be empty' : null,
+                      validator: (input) => input.isEmpty ? 'Skills cannot be empty' : null,
                       onChanged: (value){
                            
-                            _fatherName = value;
-                            print(_fatherName);
+                            _skills = value;
+                             
                           },
                     decoration: InputDecoration(
                         
-                        labelText: 'FATHER NAME',
+                        labelText: 'SKILLS',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -229,20 +260,20 @@ class _SignupPageState extends State<SignupPage> {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                   ),
-                 SizedBox(height: 10.0),
 
+ SizedBox(height: 10.0),
                   
-                TextFormField(
+                     TextFormField(
                     keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'Father Status cannot be empty' : null,
+                      validator: (input) => input.isEmpty ? 'Education cannot be empty' : null,
                       onChanged: (value){
                            
-                            _fatherStatus = value;
-                            print(_fatherStatus);
+                            _education = value;
+                            
                           },
                     decoration: InputDecoration(
                         
-                        labelText: 'FAMILY STATUS',
+                        labelText: 'EDUCATION',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -250,19 +281,40 @@ class _SignupPageState extends State<SignupPage> {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                   ),
-                 SizedBox(height: 10.0),
 
-                TextFormField(
+
+                SizedBox(height: 10.0),
+              TextFormField(
                     keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'Family Group Number cannot be empty' : null,
+                      validator: (input) => input.isEmpty ? 'ACCOUNT NUMBER cannot be empty' : null,
                       onChanged: (value){
                            
-                            _familyGroup = value;
-                            print(_familyGroup);
+                            _accountNumber = value;
+                             
                           },
                     decoration: InputDecoration(
                         
-                        labelText: 'FAMILY GROUP',
+                        labelText: 'ACCOUNT NUMBER',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
+                  ),
+                 SizedBox(height: 10.0),        
+
+      TextFormField(
+                    keyboardType: TextInputType.text,
+                      validator: (input) => input.isEmpty ? 'MEMBER  cannot be empty' : null,
+                      onChanged: (value){
+                           
+                            _memberNeeded = value;
+                             
+                          },
+                    decoration: InputDecoration(
+                        
+                        labelText: 'MEMBER NEEDED',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -271,25 +323,7 @@ class _SignupPageState extends State<SignupPage> {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                  SizedBox(height: 10.0),
-                 
-                TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'VILLAGE GROUP cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            _villageGroup = value;
-                            print(_villageGroup);
-                          },
-                    decoration: InputDecoration(
-                        
-                        labelText: 'VILLAGE GROUP',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
-                  ),
+           
                 
 
                   SizedBox(height: 50.0),
@@ -306,7 +340,7 @@ class _SignupPageState extends State<SignupPage> {
                      
                           child: Center(
                             child: Text(
-                              'NEXT',
+                              'SIGN UP',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -328,5 +362,4 @@ class _SignupPageState extends State<SignupPage> {
         );
 
   }
-  
 }

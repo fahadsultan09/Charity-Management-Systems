@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               // trailing: Text(),
-              leading: Icon(Icons.account_balance_wallet,color: Colors.white70,),
+              leading: Icon(Icons.swap_horiz,color: Colors.white70,),
               title: Text('Zakat',style: TextStyle(color: Colors.white70,)),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>zakat()));
@@ -61,8 +61,8 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               // trailing: Text(),
-              leading: Icon(Icons.notification_important,color: Colors.white70,),
-              title: Text('Notifications',style: TextStyle(color: Colors.white70,)),
+              leading: Icon(Icons.account_balance_wallet,color: Colors.white70,),
+              title: Text('Payments',style: TextStyle(color: Colors.white70,)),
               onTap: () {
 
                 Navigator.pop(context);
@@ -70,8 +70,8 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               // trailing: Text(),
-              leading: Icon(Icons.sentiment_satisfied,color: Colors.white70,),
-              title: Text('Feedback',style: TextStyle(color: Colors.white70,)),
+              leading: Icon(Icons.person_pin,color: Colors.white70,),
+              title: Text('Contact',style: TextStyle(color: Colors.white70,)),
               onTap: () {
 
                 Navigator.pop(context);
