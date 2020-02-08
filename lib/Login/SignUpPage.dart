@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:notifier/Home/Home.dart';
 import 'package:notifier/Login/Authentication.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:notifier/Login/SignUpPage2.dart';
@@ -19,8 +18,20 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool disable = false;
+   List<DocumentSnapshot> documents;
+   String selected;
   bool obsureTextValue = true;
   FirebaseMessaging fcm = FirebaseMessaging();
+  Future<void> getReciever() async{
+   final QuerySnapshot result = await Firestore.instance.collection("Users").getDocuments();
+  documents = result.documents.toList();
+  documents.forEach((data){
+    print(data.documentID);
+    _items.add(data.documentID.toString());
+    // myBatch.add(data.documentID.toString());
+  });
+  }
   void _ChangeText(){
     setState(() {
      if(obsureTextValue){
@@ -33,13 +44,11 @@ class _SignupPageState extends State<SignupPage> {
      }
     });
   }
-
+  List<String> _items = [];
   String _fullName="";
   String _email="";
   String _password="";
   String _phoneNum="";
-
-
   String _fcm="";
   int amount = 0;
   String _fatherName ="";
@@ -68,7 +77,8 @@ class _SignupPageState extends State<SignupPage> {
 
 
           Firestore _firestore = Firestore.instance;
-        _firestore.collection("Users").document("1").collection("children").document(_user.user.uid).setData(
+           _firestore.collection("Users").document(_fatherName).setData({"1":1});
+        _firestore.collection("Users").document(_fatherName).collection("children").document(_user.user.uid).setData(
         {"Email": _email,
         "Full Name": _fullName,
         "Phone": _phoneNum,
@@ -76,20 +86,25 @@ class _SignupPageState extends State<SignupPage> {
         "Family Status":_fatherStatus,
         "Family Group":_familyGroup,
         "Village Group":_villageGroup,
-        // "Reference":_reference,
-        // "Status Of Reference":_statusOfReference,
-        // "Date Of Birth":_dob,   
-        // "Source Of Income":_SOC,
-        // "Education":_education,
-        // "Gender":_gender,
-        // "Skills":_skills,
-        // "Account Number":_accountNumber,
-        // "Member Needed":_memberNeeded,
+        "token":_fcm,
+      });
+      _firestore.collection("DonorCurrentPayment").document(_user.user.uid).setData({
+        "Amount":amount,
+      });
+
+      _firestore.collection("Users2").document(_user.user.uid).setData(
+        {"Email": _email,
+        "Full Name": _fullName,
+        "Phone": _phoneNum,
+        "Father Name":_fatherName,
+        "Family Status":_fatherStatus,
+        "Family Group":_familyGroup,
+        "Village Group":_villageGroup,
         "token":_fcm,
         "Amount":amount,
       });
 
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid)));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid,_fatherName)));
        } 
     
    
@@ -111,9 +126,13 @@ class _SignupPageState extends State<SignupPage> {
  
 
   @override
-  void initState() { 
-    super.initState();
+  void initState() {
+    getReciever();
     _saveDeviceToken();
+    super.initState();
+    
+    
+    
   }
   @override
   Widget build(BuildContext context) {
@@ -179,7 +198,7 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                         suffixIcon: IconButton(icon: new Icon(Icons.remove_red_eye),onPressed: _ChangeText ,color: Colors.grey,),
                         
-                        labelText: 'PASSWORD',
+                        labelText: 'PASSWORD(Minimum 6 characters)',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -192,6 +211,7 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 10.0),
                   
                      TextFormField(
+
                     keyboardType: TextInputType.number,
                       validator: (input) => input.isEmpty ? 'Phone Number cannot be empty' : null,
                       onChanged: (value){
@@ -199,7 +219,7 @@ class _SignupPageState extends State<SignupPage> {
                             _phoneNum = value;
                           },
                     decoration: InputDecoration(
-                        
+                        hintText: "03XX-XXXXXX", 
                         labelText: 'PHONE NO.',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -210,8 +230,105 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                  SizedBox(height: 10.0),
 
+                TextFormField(
+                    keyboardType: TextInputType.text,
+                      validator: (input) => input.isEmpty ? 'VILLAGE GROUP cannot be empty' : null,
+                      onChanged: (value){
+                           
+                            _villageGroup = value;
+                            print(_villageGroup);
+                          },
+                    decoration: InputDecoration(
+                        
+                        labelText: 'VILLAGE GROUP',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
+                  ),
+                
+                 SizedBox(height: 10.0),
+
+                 
+                TextFormField(
+                    keyboardType: TextInputType.text,
+                      validator: (input) => input.isEmpty ? 'Family Group Number cannot be empty' : null,
+                      onChanged: (value){
+                           
+                            _familyGroup = value;
+                            print(_familyGroup);
+                          },
+                    decoration: InputDecoration(
+                        
+                        labelText: 'FAMILY GROUP',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
+                  ),
+                 
+
+                  SizedBox(height: 50.0),
+                 
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+
+                     Container(
+                // width: 200.0,
+                // height: 60.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: Colors.blueGrey)
+                ),
+                child : DropdownButtonHideUnderline(
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    child: new DropdownButton<String>(
+                      value: selected,
+                      items: _items.map((lable) {
+                        return new DropdownMenuItem<String>(
+                          value: lable,
+                          child: new Text(lable),
+                        );
+                      }).toList(),
+                      hint: Text('FATHER NAME'),
+                      onChanged: (value) {
+                        
+                        setState((){
+                          selected = value;
+                          _fatherName = selected;
+                        });
+                        
+                      },
+                    ),
+                  ),
+              ),
+              ),
+
+              FlatButton(color: Colors.grey,onPressed: (){
+                setState(() {
+                  if(disable==false){
+                    disable = true;
+                  }
+                  else{
+                    disable = false;
+                  }
+                });
+              }, child: Text("NEW"))
+
+                  ],
+                ),
+
+  SizedBox(height: 10.0),
                 
                 TextFormField(
+                  enabled: disable,
                     keyboardType: TextInputType.text,
                       validator: (input) => input.isEmpty ? 'FATHER NAME cannot be empty' : null,
                       onChanged: (value){
@@ -252,47 +369,6 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                  SizedBox(height: 10.0),
 
-                TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'Family Group Number cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            _familyGroup = value;
-                            print(_familyGroup);
-                          },
-                    decoration: InputDecoration(
-                        
-                        labelText: 'FAMILY GROUP',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
-                  ),
-                 SizedBox(height: 10.0),
-                 
-                TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'VILLAGE GROUP cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            _villageGroup = value;
-                            print(_villageGroup);
-                          },
-                    decoration: InputDecoration(
-                        
-                        labelText: 'VILLAGE GROUP',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
-                  ),
-                
-
-                  SizedBox(height: 50.0),
 
               GestureDetector(
                   onTap: validateAndSubmit,

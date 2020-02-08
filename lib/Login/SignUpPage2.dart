@@ -7,8 +7,8 @@ import 'package:notifier/Home/Home.dart';
 
 class SignUpPage2 extends StatefulWidget {
 
-  SignUpPage2(this.userId);
-  String userId;
+  SignUpPage2(this.userId,this.fatherName);
+  String userId,fatherName;
   @override
   _SignUpPage2State createState() => _SignUpPage2State();
 }
@@ -33,19 +33,12 @@ class _SignUpPage2State extends State<SignUpPage2> {
     
     if (true){
       try {
-    //  AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password);
-
-      FirebaseAuth auth  = FirebaseAuth.instance;
-
-        // Firestore _firestore = Firestore.instance;
       if(widget.userId!=null){
-
-
           Firestore _firestore = Firestore.instance;
-        _firestore.collection("Users").document("1").setData({
-          "1":"a",
+        _firestore.collection("Users").document(widget.fatherName).setData({
+          "1":"1",
         });
-        _firestore.collection("Users").document("1").collection("children").document(widget.userId).updateData(
+        _firestore.collection("Users").document(widget.fatherName).collection("children").document(widget.userId).updateData(
         {
 
         "Reference":_reference,
@@ -59,6 +52,25 @@ class _SignUpPage2State extends State<SignUpPage2> {
         "Member Needed":_memberNeeded,
 
       });
+        _firestore.collection("Users2").document(widget.userId).setData({
+          "1":"1",
+        });
+        _firestore.collection("Users2").document(widget.userId).updateData(
+        {
+
+        "Reference":_reference,
+        "Status Of Reference":_statusOfReference,
+        "Date Of Birth":_dob,   
+        "Source Of Income":_SOC,
+        "Education":_education,
+        "Gender":_gender,
+        "Skills":_skills,
+        "Account Number":_accountNumber,
+        "Member Needed":_memberNeeded,
+
+      });
+      
+
 
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
        } 

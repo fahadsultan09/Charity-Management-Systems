@@ -77,12 +77,12 @@ bool obsureTextValue = true;
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            // new Image(
-            //   image: AssetImage('assets/images/images.jpg'),
-            //   fit: BoxFit.cover,
-            //   color: Colors.black45,
-            //   colorBlendMode: BlendMode.darken,
-            // ),
+            new Image(
+              image: AssetImage('assets/images/images.jpg'),
+              fit: BoxFit.cover,
+              color: Colors.black45,
+              colorBlendMode: BlendMode.darken,
+            ),
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -120,6 +120,7 @@ bool obsureTextValue = true;
                 child: Column(
                   children: <Widget>[
                     new TextFormField(
+                          style: new TextStyle(color: Colors.white),
                           onChanged: (value){
                            
                             _email = value;
@@ -131,16 +132,18 @@ bool obsureTextValue = true;
                           // onSaved: (input) => _email = input,
                           keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        
                           labelText: 'EMAIL',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey),
+                              color: Colors.white),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                              borderSide: BorderSide(color: Colors.white))),
                     ),
                     SizedBox(height: 20.0),
                     new TextFormField(
+                          style: new TextStyle(color: Colors.white),
                           validator: (input){
                             PasswordFieldValidator.validate(input);
                           },
@@ -156,9 +159,9 @@ bool obsureTextValue = true;
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey),
+                              color: Colors.white),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                              borderSide: BorderSide(color: Colors.white))),
                       obscureText: obsureTextValue,
                     ),
                     SizedBox(height: 5.0),

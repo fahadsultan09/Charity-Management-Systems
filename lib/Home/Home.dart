@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
         child: Container(
           child: Stack(fit:StackFit.expand,children: <Widget>[
 
-            Image.asset("assets/images/islamabad.jpg",fit: BoxFit.cover,color: Colors.black54,colorBlendMode: BlendMode.darken,),
+            Image.asset("assets/images/images.jpg",fit: BoxFit.cover,color: Colors.black54,colorBlendMode: BlendMode.darken,),
             ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
