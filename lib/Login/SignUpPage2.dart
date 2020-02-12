@@ -52,12 +52,11 @@ class _SignUpPage2State extends State<SignUpPage2> {
         "Member Needed":_memberNeeded,
 
       });
-        _firestore.collection("Users2").document(widget.userId).setData({
-          "1":"1",
-        });
+        // _firestore.collection("Users2").document(widget.userId).setData({
+        //   "1":"1",
+        // });
         _firestore.collection("Users2").document(widget.userId).updateData(
         {
-
         "Reference":_reference,
         "Status Of Reference":_statusOfReference,
         "Date Of Birth":_dob,   
@@ -67,7 +66,6 @@ class _SignUpPage2State extends State<SignUpPage2> {
         "Skills":_skills,
         "Account Number":_accountNumber,
         "Member Needed":_memberNeeded,
-
       });
       
 
@@ -343,7 +341,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
               GestureDetector(
                   onTap: validateAndSubmit,
                   child:  Container(
-                      height: 40.0,
+                      height: 60.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
                         shadowColor: Colors.greenAccent,

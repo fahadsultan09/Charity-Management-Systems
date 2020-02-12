@@ -86,12 +86,9 @@ class _SignupPageState extends State<SignupPage> {
         "Family Status":_fatherStatus,
         "Family Group":_familyGroup,
         "Village Group":_villageGroup,
+        "Amount":amount,
         "token":_fcm,
       });
-      _firestore.collection("DonorCurrentPayment").document(_user.user.uid).setData({
-        "Amount":amount,
-      });
-
       _firestore.collection("Users2").document(_user.user.uid).setData(
         {"Email": _email,
         "Full Name": _fullName,
@@ -104,7 +101,12 @@ class _SignupPageState extends State<SignupPage> {
         "Amount":amount,
       });
 
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid,_fatherName)));
+      _firestore.collection("DonorCurrentPayment").document(_user.user.uid).setData({
+        "Amount":amount,
+      });
+
+      
+           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid,_fatherName)));
        } 
     
    

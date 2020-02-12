@@ -102,8 +102,14 @@ subtitle: Text("Exit"),
         title: Text("Notifier"),
       ),
       body: Container(
-        child: Center(
-          child: Text("FAHAD"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: Text("ZAKAK DONOR"),
+            ),
+          ],
         ),
       ),
     );
