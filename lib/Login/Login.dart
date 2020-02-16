@@ -210,8 +210,9 @@ bool obsureTextValue = true;
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'New to Apparel ?',
-                  style: TextStyle(fontFamily: 'Montserrat'),
+                  
+                  'New to Our App ?',
+                  style: TextStyle(fontFamily: 'Montserrat',color: Colors.white70),
                 ),
                 SizedBox(width: 5.0),
                 InkWell(

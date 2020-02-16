@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/umm_alqura_calendar.dart';
 import 'package:notifier/Login/Login.dart';
+import 'package:notifier/MyReciever/MyReciever.dart';
 import 'package:notifier/Zakat/Zakat.dart';
 class Home extends StatefulWidget {
   @override
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
             ListTile(
               // trailing: Text(),
               leading: Icon(Icons.swap_horiz,color: Colors.white70,),
-              title: Text('Zakat',style: TextStyle(color: Colors.white70,)),
+              title: Text('My Payments',style: TextStyle(color: Colors.white70,)),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>zakat()));
               },
@@ -62,10 +63,11 @@ class _HomeState extends State<Home> {
             ListTile(
               // trailing: Text(),
               leading: Icon(Icons.account_balance_wallet,color: Colors.white70,),
-              title: Text('Payments',style: TextStyle(color: Colors.white70,)),
+              title: Text('Recievers',style: TextStyle(color: Colors.white70,)),
               onTap: () {
 
-                Navigator.pop(context);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>myReciever()));
+
               },
             ),
             ListTile(
@@ -86,7 +88,7 @@ subtitle: Text("Exit"),
               },
               // trailing: Text(),
               leading: Icon(Icons.exit_to_app,color: Colors.white70,),
-              title: Text("Sign Out",style: TextStyle(color: Colors.white70,fontSize: 20.0)),
+              title: Text("Sign Out",style: TextStyle(color: Colors.white70,fontSize: 15.0)),
               // subtitle: Text(_islamicDate.toString(),style: TextStyle(color: Colors.white70,)),
 
               // isThreeLine: true,
@@ -98,8 +100,9 @@ subtitle: Text("Exit"),
 
       ),
       appBar: AppBar(
+         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text("Notifier"),
+        title: Text("DONOR HOME"),
       ),
       body: Container(
         child: Column(

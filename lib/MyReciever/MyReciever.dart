@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 
 
 
-class zakat extends StatefulWidget {
+class myReciever extends StatefulWidget {
   @override
-  _zakatState createState() => _zakatState();
+  _myRecieverState createState() => _myRecieverState();
 }
 
-class _zakatState extends State<zakat> {
+class _myRecieverState extends State<myReciever> {
   String uid;
   @override
   void initState() { 
@@ -27,7 +27,7 @@ class _zakatState extends State<zakat> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,title: Text("MY PAYMENTS"),
+            backgroundColor: Colors.black,title: Text("MY RECIEVERS"),
             ),
 
               body: Container(

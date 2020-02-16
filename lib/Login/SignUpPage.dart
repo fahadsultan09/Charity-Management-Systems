@@ -100,11 +100,6 @@ class _SignupPageState extends State<SignupPage> {
         "token":_fcm,
         "Amount":amount,
       });
-
-      _firestore.collection("DonorCurrentPayment").document(_user.user.uid).setData({
-        "Amount":amount,
-      });
-
       
            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid,_fatherName)));
        } 
