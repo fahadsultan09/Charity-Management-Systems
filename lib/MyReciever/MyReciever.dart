@@ -40,7 +40,7 @@ class _myRecieverState extends State<myReciever> {
               ),
         padding: EdgeInsets.all(5),
         child: FutureBuilder(
-          future: Firestore.instance.collection("DPayment").document(uid).collection('MyPayment').getDocuments(),
+          future: Firestore.instance.collection("MyZakat").document(uid).collection("MyPayments").getDocuments(),
           // initialData: InitialData,
           builder: buildReciever,
         ),
@@ -88,10 +88,10 @@ class _myRecieverState extends State<myReciever> {
                 //   radius: 25,
                 // ),
                 // title: Text(transaction['name']),
-                title: Text("Mode :"+user["PaymentMode"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                subtitle: Text("Payment Date: "+user["DateOfPayment"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
+                title: Text("Reciever Name :"+user["Name"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                subtitle: Text("Payment Date: "+user["PaymentDate"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                 trailing: Text(
-                "Rs. "+user["Amount"],
+                "Rs. "+user["Amount"].toString(),
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
