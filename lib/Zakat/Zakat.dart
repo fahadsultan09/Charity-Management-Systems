@@ -41,7 +41,7 @@ class _zakatState extends State<zakat> {
         padding: EdgeInsets.all(5),
         child: FutureBuilder(
           future: Firestore.instance.collection("DPayment").document(uid).collection('MyPayment').getDocuments(),
-          // initialData: InitialData,
+          
           builder: buildReciever,
         ),
       ),
@@ -60,7 +60,7 @@ class _zakatState extends State<zakat> {
 
                 return GestureDetector(
                     onTap: (){
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>ChildrenList(user.documentID)));
+                      
                     },
               child: Container(
                 padding: EdgeInsets.all(5),
@@ -73,8 +73,8 @@ class _zakatState extends State<zakat> {
               
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                // height: 200,
-                // color: Colors.amber,
+                
+                
                 child: Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -83,11 +83,11 @@ class _zakatState extends State<zakat> {
                 ),
               ),
               child: ListTile(
-                // leading: CircleAvatar(
-                //   backgroundImage: AssetImage("assets/images/islamabad.jpg"),
-                //   radius: 25,
-                // ),
-                // title: Text(transaction['name']),
+                
+                
+                
+                
+                
                 title: Text("Mode :"+user["PaymentMode"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                 subtitle: Text("Payment Date: "+user["DateOfPayment"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                 trailing: Text(
@@ -104,12 +104,12 @@ class _zakatState extends State<zakat> {
             },
         );
     } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData ){
-        // Handle no data
+        
         return Center(
             child: Text("No Pipeline found.",style: TextStyle(color: Colors.black),),
         );
     } else {
-        // Still loading
+        
         return Center(child: CircularProgressIndicator());
     }
 }

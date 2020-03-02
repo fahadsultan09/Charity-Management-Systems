@@ -27,9 +27,9 @@ class _SignupPageState extends State<SignupPage> {
    final QuerySnapshot result = await Firestore.instance.collection("Users").getDocuments();
   documents = result.documents.toList();
   documents.forEach((data){
-    print(data.documentID);
+
     _items.add(data.documentID.toString());
-    // myBatch.add(data.documentID.toString());
+    
   });
   }
   void _ChangeText(){
@@ -59,20 +59,20 @@ class _SignupPageState extends State<SignupPage> {
 
 
   final _formKey = new GlobalKey<FormState>();
-  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  // final DateFormat format = DateFormat("yyyy-MM-dd");
+  
+  
 
   Future validateAndSubmit () async {
     
     if (true){
       try {
-    //  AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password);
+    
                      
           AuthResult _user =  (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password));
           
    
 
-        // Firestore _firestore = Firestore.instance;
+        
       if(_user!=null){
 
 
@@ -162,7 +162,7 @@ class _SignupPageState extends State<SignupPage> {
                         
                         
                   ),
-                  // SizedBox(height: 10.0),
+                  
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                       validator: (input) => input.isEmpty ? 'Email cannot be empty' : null,
@@ -177,8 +177,8 @@ class _SignupPageState extends State<SignupPage> {
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
-                        // hintText: 'EMAIL',
-                        // hintStyle: ,
+                        
+                        
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                   ),
@@ -233,7 +233,7 @@ class _SignupPageState extends State<SignupPage> {
                       onChanged: (value){
                            
                             _villageGroup = value;
-                            print(_villageGroup);
+                            
                           },
                     decoration: InputDecoration(
                         
@@ -255,7 +255,7 @@ class _SignupPageState extends State<SignupPage> {
                       onChanged: (value){
                            
                             _familyGroup = value;
-                            print(_familyGroup);
+                            
                           },
                     decoration: InputDecoration(
                         
@@ -277,8 +277,8 @@ class _SignupPageState extends State<SignupPage> {
                   children: <Widget>[
 
                      Container(
-                // width: 200.0,
-                // height: 60.0,
+                
+                
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(color: Colors.blueGrey)
@@ -331,7 +331,7 @@ class _SignupPageState extends State<SignupPage> {
                       onChanged: (value){
                            
                             _fatherName = value;
-                            print(_fatherName);
+                            
                           },
                     decoration: InputDecoration(
                         
@@ -352,7 +352,7 @@ class _SignupPageState extends State<SignupPage> {
                       onChanged: (value){
                            
                             _fatherStatus = value;
-                            print(_fatherStatus);
+                            
                           },
                     decoration: InputDecoration(
                         

@@ -58,8 +58,8 @@ bool obsureTextValue = true;
     
       }
       catch (e){
-        print(e.toString());
-        // Firestore firestore = Firestore 
+      
+       
       }
     
   }
@@ -124,12 +124,11 @@ bool obsureTextValue = true;
                           onChanged: (value){
                            
                             _email = value;
-                             print(_email);
                           },
                           validator: (input){
                               EmailFieldValidator.validate(input);
                           },
-                          // onSaved: (input) => _email = input,
+                          
                           keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         
@@ -150,7 +149,7 @@ bool obsureTextValue = true;
                           onChanged: (value){
                            
                             _password = value;
-                             print(_password);
+                          
                           },
                           keyboardType: TextInputType.text,
                             decoration: InputDecoration(

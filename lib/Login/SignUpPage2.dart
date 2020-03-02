@@ -52,9 +52,9 @@ class _SignUpPage2State extends State<SignUpPage2> {
         "Member Needed":_memberNeeded,
 
       });
-        // _firestore.collection("Users2").document(widget.userId).setData({
-        //   "1":"1",
-        // });
+        
+        
+        
         _firestore.collection("Users2").document(widget.userId).updateData(
         {
         "Reference":_reference,
@@ -141,7 +141,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
                  SizedBox(height: 10.0),
                   
                   TextFormField(
-                    // enabled: false,
+                    
                     onTap: (){
 
                         
@@ -170,7 +170,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
                     },
                     keyboardType: TextInputType.text,
                       validator: (input) => input.isEmpty ? 'DATE OF BIRTH cannot be empty' : null,
-                    // initialValue: _dob,
+                    
                     onChanged: (value){
                         setState(() {
                           
