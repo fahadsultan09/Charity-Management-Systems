@@ -27,7 +27,7 @@ class _myRecieverState extends State<myReciever> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,title: Text("MY RECIEVERS"),
+            backgroundColor: Colors.black,title: Text("Responsibilities"),
             ),
 
               body: Container(
@@ -106,7 +106,7 @@ class _myRecieverState extends State<myReciever> {
     } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData ){
         
         return Center(
-            child: Text("No Pipeline found.",style: TextStyle(color: Colors.black),),
+            child: Text("No Recievers found.",style: TextStyle(color: Colors.white),),
         );
     } else {
         

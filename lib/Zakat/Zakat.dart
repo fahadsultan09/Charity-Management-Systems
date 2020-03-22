@@ -1,6 +1,4 @@
 
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -83,11 +81,7 @@ class _zakatState extends State<zakat> {
                 ),
               ),
               child: ListTile(
-                
-                
-                
-                
-                
+ 
                 title: Text("Mode :"+user["PaymentMode"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                 subtitle: Text("Payment Date: "+user["DateOfPayment"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                 trailing: Text(

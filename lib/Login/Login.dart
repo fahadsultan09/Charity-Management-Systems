@@ -73,7 +73,7 @@ bool obsureTextValue = true;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomPadding: true,
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[

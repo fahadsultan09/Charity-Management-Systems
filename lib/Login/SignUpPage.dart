@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notifier/Login/Authentication.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:notifier/Login/SignUpPage2.dart';
+import 'package:notifier/Models/UserClass.dart';
 
 
 
@@ -18,11 +17,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  User user;
   bool disable = false;
    List<DocumentSnapshot> documents;
    String selected;
   bool obsureTextValue = true;
-  FirebaseMessaging fcm = FirebaseMessaging();
+
   Future<void> getReciever() async{
    final QuerySnapshot result = await Firestore.instance.collection("Users").getDocuments();
   documents = result.documents.toList();
@@ -45,87 +45,36 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
   List<String> _items = [];
-  String _fullName="";
-  String _email="";
-  String _password="";
-  String _phoneNum="";
-  String _fcm="";
-  int amount = 0;
-  String _fatherName ="";
-  String _fatherStatus ="";
-  String _familyGroup ="";
-  String _villageGroup ="";
 
 
 
   final _formKey = new GlobalKey<FormState>();
-  
-  
 
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      print("Form is valid");
+      return true;
+    }
+    return false;
+  }
   Future validateAndSubmit () async {
     
-    if (true){
-      try {
-    
-                     
-          AuthResult _user =  (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email,password:_password));
-          
-   
-
-        
-      if(_user!=null){
-
-
-          Firestore _firestore = Firestore.instance;
-           _firestore.collection("Users").document(_fatherName).setData({"1":1});
-        _firestore.collection("Users").document(_fatherName).collection("children").document(_user.user.uid).setData(
-        {"Email": _email,
-        "Full Name": _fullName,
-        "Phone": _phoneNum,
-        "Father Name":_fatherName,
-        "Family Status":_fatherStatus,
-        "Family Group":_familyGroup,
-        "Village Group":_villageGroup,
-        "Amount":amount,
-        "token":_fcm,
-      });
-      _firestore.collection("Users2").document(_user.user.uid).setData(
-        {"Email": _email,
-        "Full Name": _fullName,
-        "Phone": _phoneNum,
-        "Father Name":_fatherName,
-        "Family Status":_fatherStatus,
-        "Family Group":_familyGroup,
-        "Village Group":_villageGroup,
-        "token":_fcm,
-        "Amount":amount,
-      });
-      
-           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(_user.user.uid,_fatherName)));
-       } 
-    
-   
-
-          }
-          catch (e){
-    
-           Scaffold.of(context).showSnackBar(SnackBar(content: Text("USER NOT CREATED")));
-
-        }
+    if (validateAndSave()){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage2(user)));
+     
         }
     
       }
 
-  void _saveDeviceToken() async{
-    _fcm = await fcm.getToken();
-
-  }
  
 
   @override
   void initState() {
+     user = new User();
     getReciever();
-    _saveDeviceToken();
+
     super.initState();
     
     
@@ -134,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomPadding: true,
         body:  new Form(
           key: _formKey,
           child: ListView(
@@ -148,8 +97,8 @@ class _SignupPageState extends State<SignupPage> {
                     keyboardType: TextInputType.text,
                     validator: (input) => input.isEmpty ? 'Name cannot be empty' : null,
                       onChanged: (value){
-                           
-                            _fullName = value;
+                          
+                            user.fullName = value;
                           },
                     decoration: InputDecoration(
                       labelText: 'FULL NAME ',
@@ -168,7 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'Email cannot be empty' : null,
                       onChanged: (value){
                            
-                            _email = value;
+                            user.email = value;
                     
                           },
                     decoration: InputDecoration(
@@ -188,13 +137,12 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'Password cannot be empty' : null,
                       onChanged: (value){
                            
-                            _password = value;
+                            user.password = value;
 
 
                           },
                     decoration: InputDecoration(
                         suffixIcon: IconButton(icon: new Icon(Icons.remove_red_eye),onPressed: _ChangeText ,color: Colors.grey,),
-                        
                         labelText: 'PASSWORD(Minimum 6 characters)',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -213,7 +161,7 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'Phone Number cannot be empty' : null,
                       onChanged: (value){
                            
-                            _phoneNum = value;
+                            user.phoneNum = value;
                           },
                     decoration: InputDecoration(
                         hintText: "03XX-XXXXXX", 
@@ -232,7 +180,7 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'VILLAGE GROUP cannot be empty' : null,
                       onChanged: (value){
                            
-                            _villageGroup = value;
+                            user.villageGroup = value;
                             
                           },
                     decoration: InputDecoration(
@@ -254,7 +202,7 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'Family Group Number cannot be empty' : null,
                       onChanged: (value){
                            
-                            _familyGroup = value;
+                            user.familyGroup = value;
                             
                           },
                     decoration: InputDecoration(
@@ -299,7 +247,7 @@ class _SignupPageState extends State<SignupPage> {
                         
                         setState((){
                           selected = value;
-                          _fatherName = selected;
+                          user.fatherName = selected;
                         });
                         
                       },
@@ -327,10 +275,10 @@ class _SignupPageState extends State<SignupPage> {
                 TextFormField(
                   enabled: disable,
                     keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'FATHER NAME cannot be empty' : null,
+                      validator: (input) => user.fatherName.isEmpty ? 'FATHER NAME cannot be empty' : null,
                       onChanged: (value){
                            
-                            _fatherName = value;
+                            user.fatherName = value;
                             
                           },
                     decoration: InputDecoration(
@@ -351,7 +299,7 @@ class _SignupPageState extends State<SignupPage> {
                       validator: (input) => input.isEmpty ? 'Father Status cannot be empty' : null,
                       onChanged: (value){
                            
-                            _fatherStatus = value;
+                            user.fatherStatus = value;
                             
                           },
                     decoration: InputDecoration(
