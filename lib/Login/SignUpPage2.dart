@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:notifier/Home/Home.dart';
 import 'package:notifier/Models/UserClass.dart';
+import 'package:toast/toast.dart';
 
 class SignUpPage2 extends StatefulWidget {
   SignUpPage2(this.user);
@@ -15,6 +16,7 @@ class SignUpPage2 extends StatefulWidget {
 }
 
 class _SignUpPage2State extends State<SignUpPage2> {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     FirebaseMessaging fcm = FirebaseMessaging();
   String _fcm="";
     int amount = 0;
@@ -51,12 +53,11 @@ bool validateAndSave() {
       try {
         
         
-      AuthResult firebaseUser= await FirebaseAuth.instance.signInWithEmailAndPassword(email: widget.user.email, password: widget.user.password);
-      // FirebaseUser firebaseUser = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: widget.user.email, password: widget.user.password)).user;    
-      if(firebaseUser!=null){
+       AuthResult _user =  (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.user.email,password:widget.user.password));
+      if(_user!=null){
 
         print("SUCCESS");
-          widget.user.uid = firebaseUser.user.uid;
+          widget.user.uid = _user.user.uid;
         _firestore.collection("Users").document(widget.user.fatherName).setData({"1":1});
         _firestore.collection("Users").document(widget.user.fatherName).collection("children").document(widget.user.uid).setData(
         {
@@ -71,7 +72,7 @@ bool validateAndSave() {
         "token":_fcm,
         "Reference":widget.user.reference,
         "Status Of Reference":widget.user.statusOfReference,
-        // "Date Of Birth":widget.user.dob,
+        
         "Source Of Income":widget.user.SOC,
         "Education":widget.user.education,
         "Gender":widget.user.gender,
@@ -96,7 +97,7 @@ bool validateAndSave() {
         "Amount":amount,
         "Reference":widget.user.reference,
         "Status Of Reference":widget.user.statusOfReference,
-        // "Date Of Birth":widget.user.dob,   
+        
         "Source Of Income":widget.user.SOC,
         "Education":widget.user.education,
         "Gender":widget.user.gender,
@@ -115,7 +116,11 @@ bool validateAndSave() {
           }
           catch (e){
     
-           Scaffold.of(context).showSnackBar(SnackBar(content: Text("USER NOT CREATED")));
+           if (e.toString() ==
+                    "PlatformException(ERROR_EMAIL_ALREADY_IN_USE, The email address is already in use by another account., null)") {
+                  Toast.show("Sign Up Failed ! Email already in use", context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                }
 
         }
         }
@@ -125,6 +130,7 @@ bool validateAndSave() {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _scaffoldKey,
         resizeToAvoidBottomPadding: true,
         body:  new Form(
           key: _formKey,
@@ -176,63 +182,7 @@ bool validateAndSave() {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                  SizedBox(height: 10.0),
-                  
-//                   TextFormField(
-                    
-//                     onTap: (){
-
-                        
-//                          Future<DateTime> selectedDate = showDatePicker(
-//    context: context,
-//    initialDate: DateTime(1990),
-//    firstDate: DateTime(1950),
-//    lastDate: DateTime.now(),
-//    builder: (BuildContext context, Widget child) {
-//      return Theme(
-//        data: ThemeData.dark(),
-//        child: child,
-//      );
-//    },
-//  );
-
-//  if(selectedDate!=null){
-//     selectedDate.then((onValue){
-//       setState(() {
-//       widget.user.dob =   onValue.toString().substring(0,10);
-//       print(widget.user.dob);
-
-//       });
-//     });
-//  }
       
-//                     },
-//                     keyboardType: TextInputType.text,
-//                       // validator: (input) => input.isEmpty ? 'DATE OF BIRTH cannot be empty' : null,
-                    
-//                     onChanged: (value){
-//                         setState(() {
-                          
-//                           value = widget.user.dob;
-
-//                         });
-//                     },
-//                     decoration: InputDecoration(
-//                         suffixIcon: IconButton(icon: Icon(Icons.calendar_today),onPressed: (){
-                             
-//                         },),
-//                         labelText: 'DATE OF BIRTH',
-//                         labelStyle: TextStyle(
-//                             fontFamily: 'Montserrat',
-//                             fontWeight: FontWeight.bold,
-//                             color: Colors.grey),
-//                         focusedBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.green))),
-//                   ),
-
-//                  SizedBox(height: 10.0),
-
-
-                 
                    Container(
                 width: 150.0,
                 height: 60.0,

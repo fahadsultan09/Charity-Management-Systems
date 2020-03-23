@@ -25,7 +25,7 @@ class _zakatState extends State<zakat> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,title: Text("MY PAYMENTS"),
+            backgroundColor: Colors.black,title: Text("Donations"),
             ),
 
               body: Container(

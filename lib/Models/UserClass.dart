@@ -19,7 +19,6 @@ class User{
   String memberNeeded ;
   String SOC;
 
-
   User(){
   uid = "";
   gender = "Male";

@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
             ListTile(
               
               leading: Icon(Icons.swap_horiz,color: Colors.white70,),
-              title: Text('My Funds',style: TextStyle(color: Colors.white70,)),
+              title: Text('My Donations',style: TextStyle(color: Colors.white70,)),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>zakat()));
               },
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
             ListTile(
               
               leading: Icon(Icons.account_balance_wallet,color: Colors.white70,),
-              title: Text('My Responsibilities',style: TextStyle(color: Colors.white70,)),
+              title: Text('My Utilizations',style: TextStyle(color: Colors.white70,)),
               onTap: () {
 
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>myReciever()));
