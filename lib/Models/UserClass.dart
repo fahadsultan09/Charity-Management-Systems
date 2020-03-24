@@ -16,9 +16,9 @@ class User{
   String statusOfReference ;
   String dob;
   String accountNumber;
-  String memberNeeded ;
+  String responsibiltyType ;
   String SOC;
-
+  int dueDay;
   User(){
   uid = "";
   gender = "Male";
@@ -32,11 +32,12 @@ class User{
    villageGroup = "";
    education= "";
    skills= "";
+   
    reference = "";
    statusOfReference = "";
    dob= "0000-00-00";
    accountNumber= "";
-   memberNeeded = "";
+   responsibiltyType = "";
    SOC= "";
   }
 

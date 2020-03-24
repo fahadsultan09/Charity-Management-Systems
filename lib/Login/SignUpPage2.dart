@@ -16,6 +16,7 @@ class SignUpPage2 extends StatefulWidget {
 }
 
 class _SignUpPage2State extends State<SignUpPage2> {
+  List<String> responsibilityType = ["Stationary Type", "Business Support"];
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     FirebaseMessaging fcm = FirebaseMessaging();
   String _fcm="";
@@ -35,7 +36,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
 
   Firestore _firestore = Firestore.instance;
   final _formKey = new GlobalKey<FormState>();
-  List<String> _items = ["Male","Female"];
+  // List<String> _items = ["Male","Female"];
 
 bool validateAndSave() {
     final form = _formKey.currentState;
@@ -50,7 +51,10 @@ bool validateAndSave() {
     
 
     if (validateAndSave()){
-      try {
+
+
+
+                try {
         
         
        AuthResult _user =  (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.user.email,password:widget.user.password));
@@ -72,13 +76,12 @@ bool validateAndSave() {
         "token":_fcm,
         "Reference":widget.user.reference,
         "Status Of Reference":widget.user.statusOfReference,
-        
         "Source Of Income":widget.user.SOC,
         "Education":widget.user.education,
         "Gender":widget.user.gender,
         "Skills":widget.user.skills,
         "Account Number":widget.user.accountNumber,
-        "Member Needed":widget.user.memberNeeded,
+        // "Member Needed":widget.user.memberNeeded,
 
       });
         
@@ -97,13 +100,12 @@ bool validateAndSave() {
         "Amount":amount,
         "Reference":widget.user.reference,
         "Status Of Reference":widget.user.statusOfReference,
-        
         "Source Of Income":widget.user.SOC,
         "Education":widget.user.education,
         "Gender":widget.user.gender,
         "Skills":widget.user.skills,
         "Account Number":widget.user.accountNumber,
-        "Member Needed":widget.user.memberNeeded,
+        // "Member Needed":widget.user.memberNeeded,
       });
       
 
@@ -123,6 +125,13 @@ bool validateAndSave() {
                 }
 
         }
+          // if(widget.user.dueDay<=31){
+
+          // }
+          // else{
+          //   Toast.show("DUE DATE CANNOT BE GREATER THAN 31", context,backgroundColor: Colors.red, duration: Toast.LENGTH_LONG,
+          //           gravity: Toast.BOTTOM);
+          // }
         }
     
       }
@@ -182,41 +191,63 @@ bool validateAndSave() {
                             borderSide: BorderSide(color: Colors.green))),
                   ),
                  SizedBox(height: 10.0),
-      
-                   Container(
-                width: 150.0,
-                height: 60.0,
-                decoration: BoxDecoration(
+                 
 
-                    borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: Colors.blueGrey),
-                ),
-                child : DropdownButtonHideUnderline(
-
-                  child: ButtonTheme(
-                    
-                    alignedDropdown: true,
-                    child: new DropdownButton<String>(
-                      value: widget.user.gender,
-                      items: _items.map((lable) {
-                        return new DropdownMenuItem<String>(
-                          value: lable,
-
-                          child: new Text(lable),
-                        );
-                      }).toList(),
-                      hint: Text('Gender'),
-                      onChanged: (value) {
-                        setState((){
-                          widget.user.gender = value;
-    
-                        });
+//                      TextFormField(
+//                     keyboardType: TextInputType.text,
+//                       validator: (input) => input.isEmpty ? 'Due Day cannot be empty' : null,
+//                       onChanged: (value){
+                           
+//                             widget.user.dueDay = int.parse(value);
+                             
+//                           },
+//                     decoration: InputDecoration(
                         
-                      },
-                    ),
-                  ),
-              ),
-              ),
+//                         labelText: 'DUE DAY (OF EVERY MONTH)',
+//                         labelStyle: TextStyle(
+//                             fontFamily: 'Montserrat',
+//                             fontWeight: FontWeight.bold,
+//                             color: Colors.grey),
+//                         focusedBorder: UnderlineInputBorder(
+//                             borderSide: BorderSide(color: Colors.green))),
+//                   ),
+
+//  SizedBox(height: 10.0),
+      
+              //      Container(
+              //   width: 150.0,
+              //   height: 60.0,
+              //   decoration: BoxDecoration(
+
+              //       borderRadius: BorderRadius.circular(20.0),
+              //       border: Border.all(color: Colors.blueGrey),
+              //   ),
+              //   child : DropdownButtonHideUnderline(
+
+              //     child: ButtonTheme(
+                    
+              //       alignedDropdown: true,
+              //       child: new DropdownButton<String>(
+              //         value: widget.user.gender,
+              //         items: _items.map((lable) {
+              //           return new DropdownMenuItem<String>(
+              //             value: lable,
+
+              //             child: new Text(lable),
+              //           );
+              //         }).toList(),
+              //         hint: Text('Gender'),
+              //         onChanged: (value) {
+              //           setState((){
+              //             widget.user.gender = value;
+    
+              //           });
+                        
+              //         },
+              //       ),
+              //     ),
+              // ),
+              // ),
               SizedBox(height: 10.0),
               
                      TextFormField(
@@ -300,27 +331,46 @@ bool validateAndSave() {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                   ),
-                 SizedBox(height: 10.0),        
+   SizedBox(height: 20.0),
 
-      TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'MEMBER  cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            widget.user.memberNeeded = value;
-                             
-                          },
-                    decoration: InputDecoration(
+              //   Container(
+              //   width: MediaQuery.of(context).size.width-50,
+              //   height: 60.0,
+              //   decoration: BoxDecoration(
+
+              //       borderRadius: BorderRadius.circular(20.0),
+              //       border: Border.all(color: Colors.blueGrey),
+              //   ),
+              //   child : DropdownButtonHideUnderline(
+
+              //     child: ButtonTheme(
+                    
+              //       alignedDropdown: true,
+              //       child: new DropdownButton<String>(
+              //         // value: user.villageGroup.toString(),
+              //         items: responsibilityType.map((lable) {
+              //           return new DropdownMenuItem<String>(
+              //             value: lable,
+
+              //             child: new Text(lable),
+              //           );
+              //         }).toList(),
+              //         hint: Text('RESPONSIBILITY TYPE'),
+              //         onChanged: (value) {
+              //           setState((){
+              //             widget.user.responsibiltyType = value;
+              //             Toast.show(widget.user.responsibiltyType+" selected", context,
+              //       duration: Toast.LENGTH_LONG,
+              //       gravity: Toast.BOTTOM,
+              //       backgroundColor: Colors.blue);
+              //           });
                         
-                        labelText: 'MEMBER NEEDED',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
-                  ),
-                 SizedBox(height: 10.0),
+              //         },
+              //       ),
+              //     ),
+              // ),
+              // ),
+              //  SizedBox(height: 20.0),
            
                 
 

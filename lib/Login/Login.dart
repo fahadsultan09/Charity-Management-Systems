@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
 bool obsureTextValue = true;
 
-  void _ChangeText(){
+  void _changeText(){
     setState(() {
      if(obsureTextValue){
        obsureTextValue = false;
@@ -81,7 +81,7 @@ bool obsureTextValue = true;
         key: _scaffoldKey,
         resizeToAvoidBottomPadding: true,
         body: Form(
-          key: _formKey,
+          key: _formKey,  
                   child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -161,7 +161,7 @@ bool obsureTextValue = true;
                             },
                             keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                             suffixIcon: IconButton(icon: new Icon(Icons.remove_red_eye),onPressed: _ChangeText ,color: Colors.grey,),
+                             suffixIcon: IconButton(icon: new Icon(Icons.remove_red_eye),onPressed: _changeText ,color: Colors.grey,),
                             labelText: 'PASSWORD',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',

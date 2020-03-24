@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notifier/Login/Authentication.dart';
 import 'package:notifier/Login/SignUpPage2.dart';
 import 'package:notifier/Models/UserClass.dart';
+import 'package:toast/toast.dart';
 
 
 
@@ -17,6 +18,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+   String villageGroup = "SELECT THE OPTION";
   User user;
   bool disable = false;
    List<DocumentSnapshot> documents;
@@ -45,9 +47,10 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
   List<String> _items = [];
-
-
-
+String gender = "Male";
+List<String> _genderitems = ["Male","Female"];
+List<String> villageGroupitems = ["Bhawalnagar","Mailsi","Faisalabad","Karachi","Patoki"];
+List<String > familygrp = ["01","02","03","04","05"];
   final _formKey = new GlobalKey<FormState>();
 
   bool validateAndSave() {
@@ -173,50 +176,124 @@ class _SignupPageState extends State<SignupPage> {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                   ),
-                 SizedBox(height: 10.0),
+                 SizedBox(height: 20.0),
 
-                TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'VILLAGE GROUP cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            user.villageGroup = value;
-                            
-                          },
-                    decoration: InputDecoration(
+                 Container(
+                width: MediaQuery.of(context).size.width-50,
+                height: 60.0,
+                decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: Colors.blueGrey),
+                    
+                ),
+                child : DropdownButtonHideUnderline(
+
+                  child: ButtonTheme(
+                    
+                    alignedDropdown: true,
+                    child: new DropdownButton<String>(
+                      value: gender,
+                      items: _genderitems.map((lable) {
+                        return new DropdownMenuItem<String>(
+                          value: lable,
+
+                          child: new Text(lable),
+                        );
+                      }).toList(),
+                      hint: Text('Gender'),
+                      onChanged: (value) {
+                        setState((){
+                     
+                            user.gender = value;
+
+                            print(user.gender);
+                        });
                         
-                        labelText: 'VILLAGE GROUP',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
+                      },
+                    ),
                   ),
-                
-                 SizedBox(height: 10.0),
+              ),
+              ),
+               SizedBox(height: 20.0),
 
-                 
-                TextFormField(
-                    keyboardType: TextInputType.text,
-                      validator: (input) => input.isEmpty ? 'Family Group Number cannot be empty' : null,
-                      onChanged: (value){
-                           
-                            user.familyGroup = value;
-                            
-                          },
-                    decoration: InputDecoration(
+                Container(
+                width: MediaQuery.of(context).size.width-50,
+                height: 60.0,
+                decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: Colors.blueGrey),
+                ),
+                child : DropdownButtonHideUnderline(
+
+                  child: ButtonTheme(
+                    
+                    alignedDropdown: true,
+                    child: new DropdownButton<String>(
+                      // value: user.villageGroup.toString(),
+                      items: villageGroupitems.map((lable) {
+                        return new DropdownMenuItem<String>(
+                          value: lable,
+
+                          child: new Text(lable),
+                        );
+                      }).toList(),
+                      hint: Text('Village Group'),
+                      onChanged: (value) {
+                        setState((){
+                          user.villageGroup = value;
+                          Toast.show(user.villageGroup+" selected", context,
+                    duration: Toast.LENGTH_LONG,
+                    gravity: Toast.BOTTOM,
+                    backgroundColor: Colors.green[500]);
+                        });
                         
-                        labelText: 'FAMILY GROUP',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green))),
+                      },
+                    ),
                   ),
-                 
+              ),
+              ),
+               SizedBox(height: 20.0),
 
+                Container(
+                width: MediaQuery.of(context).size.width-50,
+                height: 60.0,
+                decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: Colors.blueGrey),
+                ),
+                child : DropdownButtonHideUnderline(
+
+                  child: ButtonTheme(
+                    
+                    alignedDropdown: true,
+                    child: new DropdownButton<String>(
+                      // value: user.villageGroup.toString(),
+                      items: familygrp.map((lable) {
+                        return new DropdownMenuItem<String>(
+                          value: lable,
+
+                          child: new Text(lable),
+                        );
+                      }).toList(),
+                      hint: Text('Family Group'),
+                      onChanged: (value) {
+                        setState((){
+                          user.familyGroup = value;
+                          Toast.show(user.familyGroup+" selected", context,
+                    duration: Toast.LENGTH_LONG,
+                    gravity: Toast.BOTTOM,
+                    backgroundColor: Colors.green[500]);
+                        });
+                        
+                      },
+                    ),
+                  ),
+              ),
+              ),
+              
                   SizedBox(height: 50.0),
                  
 
