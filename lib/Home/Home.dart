@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
 
       ),
       appBar: AppBar(
-         backgroundColor: Colors.white,
+         backgroundColor: Colors.black,
         centerTitle: true,
         title: Text("DONOR HOME"),
       ),
