@@ -2,15 +2,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:notifier/Utils/Utils.dart';
 
 
 
-class myReciever extends StatefulWidget {
+class Zakat extends StatefulWidget {
   @override
-  _myRecieverState createState() => _myRecieverState();
+  _ZakatState createState() => _ZakatState();
 }
 
-class _myRecieverState extends State<myReciever> {
+class _ZakatState extends State<Zakat> {
   String uid;
   @override
   void initState() { 
@@ -25,7 +26,7 @@ class _myRecieverState extends State<myReciever> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,title: Text("Utilizations"),
+            backgroundColor: Colors.black,title: Text("Donations"),
             ),
 
               body: Container(
@@ -33,12 +34,12 @@ class _myRecieverState extends State<myReciever> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.black, Colors.blue[900]])
+              colors: [Colors.black, backgroundcolor])
               
               ),
         padding: EdgeInsets.all(5),
         child: FutureBuilder(
-          future: Firestore.instance.collection("MyZakat").document(uid).collection("MyPayments").orderBy('timestamp',descending: true).getDocuments(),
+          future: Firestore.instance.collection("DPayment").document(uid).collection('MyPayment').getDocuments(),
           
           builder: buildReciever,
         ),
@@ -81,15 +82,11 @@ class _myRecieverState extends State<myReciever> {
                 ),
               ),
               child: ListTile(
-                
-                
-                
-                
-                
-                title: Text("Reciever Name :"+user["Name"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                subtitle: Text("Payment Date: "+user["PaymentDate"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
+ 
+                title: Text("Mode :"+user["PaymentMode"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                subtitle: Text("Payment Date: "+user["DateOfPayment"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                 trailing: Text(
-                "Rs. "+user["Amount"].toString(),
+                "Rs. "+user["Amount"],
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
@@ -104,7 +101,7 @@ class _myRecieverState extends State<myReciever> {
     } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData ){
         
         return Center(
-            child: Text("No Recievers found.",style: TextStyle(color: Colors.white),),
+            child: Text("No Pipeline found.",style: TextStyle(color: Colors.black),),
         );
     } else {
         

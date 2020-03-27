@@ -2,15 +2,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:notifier/Utils/Utils.dart';
 
 
 
-class zakat extends StatefulWidget {
+class Utilizations extends StatefulWidget {
   @override
-  _zakatState createState() => _zakatState();
+  _UtilizationsState createState() => _UtilizationsState();
 }
 
-class _zakatState extends State<zakat> {
+class _UtilizationsState extends State<Utilizations> {
   String uid;
   @override
   void initState() { 
@@ -25,7 +26,7 @@ class _zakatState extends State<zakat> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,title: Text("Donations"),
+            backgroundColor: Colors.black,title: Text("Utilizations"),
             ),
 
               body: Container(
@@ -38,7 +39,7 @@ class _zakatState extends State<zakat> {
               ),
         padding: EdgeInsets.all(5),
         child: FutureBuilder(
-          future: Firestore.instance.collection("DPayment").document(uid).collection('MyPayment').getDocuments(),
+          future: Firestore.instance.collection("MyZakat").document(uid).collection("MyPayments").orderBy('timestamp',descending: true).getDocuments(),
           
           builder: buildReciever,
         ),
@@ -66,7 +67,7 @@ class _zakatState extends State<zakat> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.white70, Colors.blue[900]]),
+              colors: [Colors.white70, backgroundcolor]),
               
               
                   borderRadius: BorderRadius.circular(12.0),
@@ -81,11 +82,15 @@ class _zakatState extends State<zakat> {
                 ),
               ),
               child: ListTile(
- 
-                title: Text("Mode :"+user["PaymentMode"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                subtitle: Text("Payment Date: "+user["DateOfPayment"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
+                
+                
+                
+                
+                
+                title: Text("Reciever Name :"+user["Name"],style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                subtitle: Text("Payment Date: "+user["PaymentDate"],style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                 trailing: Text(
-                "Rs. "+user["Amount"],
+                "Rs. "+user["Amount"].toString(),
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
@@ -100,7 +105,7 @@ class _zakatState extends State<zakat> {
     } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData ){
         
         return Center(
-            child: Text("No Pipeline found.",style: TextStyle(color: Colors.black),),
+            child: Text("No Recievers found.",style: TextStyle(color: Colors.white),),
         );
     } else {
         

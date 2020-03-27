@@ -231,7 +231,7 @@ List<String > familygrp = ["01","02","03","04","05"];
                     
                     alignedDropdown: true,
                     child: new DropdownButton<String>(
-                      // value: user.villageGroup.toString(),
+                      
                       items: villageGroupitems.map((lable) {
                         return new DropdownMenuItem<String>(
                           value: lable,
@@ -270,7 +270,7 @@ List<String > familygrp = ["01","02","03","04","05"];
                     
                     alignedDropdown: true,
                     child: new DropdownButton<String>(
-                      // value: user.villageGroup.toString(),
+                      
                       items: familygrp.map((lable) {
                         return new DropdownMenuItem<String>(
                           value: lable,

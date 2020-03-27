@@ -133,9 +133,8 @@ bool obsureTextValue = true;
                              
                               _email = value;
                             },
-                            validator: (input){
-                                EmailFieldValidator.validate(input);
-                            },
+                            validator: (input) => EmailFieldValidator.validate(input),
+                            
                             
                             keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -151,9 +150,8 @@ bool obsureTextValue = true;
                       SizedBox(height: 20.0),
                       new TextFormField(
                             style: new TextStyle(color: Colors.white),
-                            validator: (input){
-                              PasswordFieldValidator.validate(input);
-                            },
+                            validator: (input)=>PasswordFieldValidator.validate(input),
+                            
                             onChanged: (value){
                              
                               _password = value;

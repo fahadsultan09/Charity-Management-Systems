@@ -4,8 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:notifier/Login/Login.dart';
-import 'package:notifier/MyReciever/MyReciever.dart';
-import 'package:notifier/Zakat/Zakat.dart';
+import 'package:notifier/Utilizations/Utilizations.dart';
+import 'package:notifier/Donations/Donations.dart';
+import 'package:notifier/Utils/Utils.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.swap_horiz,color: Colors.white70,),
               title: Text('Donations',style: TextStyle(color: Colors.white70,)),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>zakat()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Zakat()));
               },
             ),
             ListTile(
@@ -82,7 +83,7 @@ class _HomeState extends State<Home> {
               title: Text('Utilizations',style: TextStyle(color: Colors.white70,)),
               onTap: () {
 
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>myReciever()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Utilizations()));
 
               },
             ),
@@ -122,17 +123,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
-
-Color backgroundcolor = HexColor("464976");
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

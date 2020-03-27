@@ -36,7 +36,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
 
   Firestore _firestore = Firestore.instance;
   final _formKey = new GlobalKey<FormState>();
-  // List<String> _items = ["Male","Female"];
+  
 
 bool validateAndSave() {
     final form = _formKey.currentState;
@@ -81,7 +81,7 @@ bool validateAndSave() {
         "Gender":widget.user.gender,
         "Skills":widget.user.skills,
         "Account Number":widget.user.accountNumber,
-        // "Member Needed":widget.user.memberNeeded,
+        
 
       });
         
@@ -105,7 +105,7 @@ bool validateAndSave() {
         "Gender":widget.user.gender,
         "Skills":widget.user.skills,
         "Account Number":widget.user.accountNumber,
-        // "Member Needed":widget.user.memberNeeded,
+        
       });
       
 
@@ -125,13 +125,13 @@ bool validateAndSave() {
                 }
 
         }
-          // if(widget.user.dueDay<=31){
+          
 
-          // }
-          // else{
-          //   Toast.show("DUE DATE CANNOT BE GREATER THAN 31", context,backgroundColor: Colors.red, duration: Toast.LENGTH_LONG,
-          //           gravity: Toast.BOTTOM);
-          // }
+          
+          
+          
+          
+          
         }
     
       }
@@ -193,61 +193,61 @@ bool validateAndSave() {
                  SizedBox(height: 10.0),
                  
 
-//                      TextFormField(
-//                     keyboardType: TextInputType.text,
-//                       validator: (input) => input.isEmpty ? 'Due Day cannot be empty' : null,
-//                       onChanged: (value){
+
+
+
+
                            
-//                             widget.user.dueDay = int.parse(value);
+
                              
-//                           },
-//                     decoration: InputDecoration(
-                        
-//                         labelText: 'DUE DAY (OF EVERY MONTH)',
-//                         labelStyle: TextStyle(
-//                             fontFamily: 'Montserrat',
-//                             fontWeight: FontWeight.bold,
-//                             color: Colors.grey),
-//                         focusedBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.green))),
-//                   ),
 
-//  SizedBox(height: 10.0),
+
+                        
+
+
+
+
+
+
+
+
+
+
       
-              //      Container(
-              //   width: 150.0,
-              //   height: 60.0,
-              //   decoration: BoxDecoration(
+              
+              
+              
+              
 
-              //       borderRadius: BorderRadius.circular(20.0),
-              //       border: Border.all(color: Colors.blueGrey),
-              //   ),
-              //   child : DropdownButtonHideUnderline(
+              
+              
+              
+              
 
-              //     child: ButtonTheme(
+              
                     
-              //       alignedDropdown: true,
-              //       child: new DropdownButton<String>(
-              //         value: widget.user.gender,
-              //         items: _items.map((lable) {
-              //           return new DropdownMenuItem<String>(
-              //             value: lable,
+              
+              
+              
+              
+              
+              
 
-              //             child: new Text(lable),
-              //           );
-              //         }).toList(),
-              //         hint: Text('Gender'),
-              //         onChanged: (value) {
-              //           setState((){
-              //             widget.user.gender = value;
+              
+              
+              
+              
+              
+              
+              
     
-              //           });
+              
                         
-              //         },
-              //       ),
-              //     ),
-              // ),
-              // ),
+              
+              
+              
+              
+              
               SizedBox(height: 10.0),
               
                      TextFormField(
@@ -333,44 +333,44 @@ bool validateAndSave() {
                   ),
    SizedBox(height: 20.0),
 
-              //   Container(
-              //   width: MediaQuery.of(context).size.width-50,
-              //   height: 60.0,
-              //   decoration: BoxDecoration(
+              
+              
+              
+              
 
-              //       borderRadius: BorderRadius.circular(20.0),
-              //       border: Border.all(color: Colors.blueGrey),
-              //   ),
-              //   child : DropdownButtonHideUnderline(
+              
+              
+              
+              
 
-              //     child: ButtonTheme(
+              
                     
-              //       alignedDropdown: true,
-              //       child: new DropdownButton<String>(
-              //         // value: user.villageGroup.toString(),
-              //         items: responsibilityType.map((lable) {
-              //           return new DropdownMenuItem<String>(
-              //             value: lable,
+              
+              
+              
+              
+              
+              
 
-              //             child: new Text(lable),
-              //           );
-              //         }).toList(),
-              //         hint: Text('RESPONSIBILITY TYPE'),
-              //         onChanged: (value) {
-              //           setState((){
-              //             widget.user.responsibiltyType = value;
-              //             Toast.show(widget.user.responsibiltyType+" selected", context,
-              //       duration: Toast.LENGTH_LONG,
-              //       gravity: Toast.BOTTOM,
-              //       backgroundColor: Colors.blue);
-              //           });
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
                         
-              //         },
-              //       ),
-              //     ),
-              // ),
-              // ),
-              //  SizedBox(height: 20.0),
+              
+              
+              
+              
+              
+              
            
                 
 

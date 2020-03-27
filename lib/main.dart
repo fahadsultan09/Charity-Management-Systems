@@ -20,10 +20,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-// Member Needed --> Purpose
-// Drop Downs 
-// Purpose 
-
-// Gmail Account 
