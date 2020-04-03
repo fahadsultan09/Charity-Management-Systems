@@ -26,6 +26,7 @@ class _ZakatState extends State<Zakat> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: Colors.black,title: Text("Donations"),
             ),
 

@@ -76,6 +76,7 @@ class _HomeState extends State<Home> {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Zakat()));
               },
+              
             ),
             ListTile(
               
@@ -91,7 +92,7 @@ class _HomeState extends State<Home> {
               
               leading: Icon(Icons.attach_money,color: Colors.white70,),
               title: Text('Balance',style: TextStyle(color: Colors.white70,)),
-              trailing: Text(amount==0?"":"Rs.   "+amount.toString(),style: TextStyle(color: Colors.white70,)),
+              trailing: Text(amount==0?"Rs. 0":"Rs.   "+amount.toString(),style: TextStyle(color: Colors.white70,)),
             ),
                         
             Divider(color: Colors.black87,height: 50,),
@@ -115,7 +116,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
          backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text("DONOR HOME"),
+        title: Text("Home"),
       ),
       body: Container(
         color: backgroundcolor,

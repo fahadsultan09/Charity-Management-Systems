@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notifier/Login/Authentication.dart';
+import 'package:notifier/Home/Home.dart';
 import 'package:notifier/Login/RootPage.dart';
 
 
@@ -11,11 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Donor',
+      title: 'Tadbeer Contributor',
       theme: ThemeData(
           accentColor: CupertinoColors.systemBlue,
       ),
       home: RootPage(auth: new Auth(),),
+      
     );
   }
 }
