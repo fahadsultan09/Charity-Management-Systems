@@ -68,8 +68,11 @@ class _LoginPageState extends State<LoginPage> {
             email: _email, password: _password);
 
         if (user != null) {
-          Firestore.instance.collection("Users2").document(user.user.uid).updateData({
-            "token":_fcm,
+          Firestore.instance
+              .collection("Users2")
+              .document(user.user.uid)
+              .updateData({
+            "token": _fcm,
           });
           Toast.show("Your Account has Login Successfully", context,
               duration: Toast.LENGTH_LONG,
@@ -141,16 +144,18 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
                           child: Text('Tadbeer',
                               style: TextStyle(
-                                color: Colors.white54,
-                                  fontSize: 55.0, fontWeight: FontWeight.bold)),
+                                  color: Colors.white54,
+                                  fontSize: 55.0,
+                                  fontWeight: FontWeight.bold)),
                         ),
                         Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
                           child: Text('Contributor',
                               style: TextStyle(
-                                color: Colors.white54,
-                                  fontSize: 45.0, fontWeight: FontWeight.bold)),
+                                  color: Colors.white54,
+                                  fontSize: 45.0,
+                                  fontWeight: FontWeight.bold)),
                         ),
                         Container(
                           alignment: Alignment.centerRight,
@@ -237,28 +242,6 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       )),
                   SizedBox(height: 15.0),
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
                 ],
               )
             ],
