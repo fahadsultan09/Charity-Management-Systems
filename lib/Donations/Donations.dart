@@ -102,7 +102,7 @@ class _ZakatState extends State<Zakat> {
     } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData ){
         
         return Center(
-            child: Text("No Pipeline found.",style: TextStyle(color: Colors.black),),
+            child: Text("No Donors found.",style: TextStyle(color: Colors.white70),),
         );
     } else {
         

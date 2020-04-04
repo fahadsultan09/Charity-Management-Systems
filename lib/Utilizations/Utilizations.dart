@@ -75,15 +75,17 @@ class _UtilizationsState extends State<Utilizations> {
                   ),
                 ),
                 child: ListTile(
-                    title: Text("Reciever Name :" + user["Name"],
+                    title: Text("Name :" + user["Name"],
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+                            fontSize: 16, fontWeight: FontWeight.bold)),
                     subtitle: Text(
                       "Payment Date: " + user["PaymentDate"],
                       style:
                           TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                     trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(
                           "Rs. " + user["Amount"].toString(),
@@ -110,8 +112,8 @@ class _UtilizationsState extends State<Utilizations> {
         !snapshot.hasData) {
       return Center(
         child: Text(
-          "No Recievers found.",
-          style: TextStyle(color: Colors.white),
+          "No Utilizations found.",
+          style: TextStyle(color: Colors.white70),
         ),
       );
     } else {

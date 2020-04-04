@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 Color backgroundcolor = HexColor("464976");
+
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");

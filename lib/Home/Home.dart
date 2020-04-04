@@ -19,12 +19,16 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     FirebaseAuth.instance.currentUser().then((user){
-      setState(() {
+    
         Firestore.instance.collection("Users2").document(user.uid).get().then((doc){
-          _fullName = doc["Full Name"];
+          setState(() {
+            _fullName = doc["Full Name"];
           amount = doc["Amount"];
+          print(doc["Amount"]);
+
+          });
         });
-      });
+     
     });
     super.initState();
   }
