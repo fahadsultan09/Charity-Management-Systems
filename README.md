@@ -1,4 +1,4 @@
-# notifier
+# Zakat Notifier
 
 A new Flutter Freelance project.
 
