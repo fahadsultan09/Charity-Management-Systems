@@ -1,6 +1,6 @@
 # notifier
 
-A new Flutter project.
+A new Flutter Freelance project.
 
 ## Getting Started
 
