@@ -1,4 +1,4 @@
-# Zakat Notifier
+# Charity Management System
 
 A new Flutter Freelance project.
 
